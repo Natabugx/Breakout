@@ -20,8 +20,8 @@ doExit = False
 clock = pygame.time.Clock()
 
 # Variables to hold paddle position
-p2x = 650
-p2y = 200
+p2x = 350
+p2y = 400
 
 # Game loop
 while not doExit:
@@ -33,10 +33,10 @@ while not doExit:
             
     # Game logic
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_UP] and p2y > 0:
-        p2y -= 5
-    if keys[pygame.K_DOWN] and p2y < 400:  # Prevent paddle from going off screen
-        p2y += 5
+    if keys[pygame.K_LEFT] and p2x > 0:
+        p2x -= 5
+    if keys[pygame.K_RIGHT] and p2x < 600:  # Prevent paddle from going off screen
+        p2x += 5
     
     # Ball Movement
     bx += bVx
@@ -51,12 +51,12 @@ while not doExit:
         bVy *= -1
 
     # Ball paddle reflection
-    if bx + 10 > p2x and by + 10 > p2y and by < p2y + 100:
-        bVx *= -1
+    if bx + 10 > p2x and by + 10 > p2y and bx < p2x + 100:
+        bVy *=-1
 
     # Render section
     screen.fill((191, 19, 148))  # Wipes screen Pink
-    pygame.draw.rect(screen, (255, 255, 255), (p2x, p2y, 20, 100), 1)  # Right paddle
+    pygame.draw.rect(screen, (255, 255, 255), (p2x, p2y, 100, 20), 1)  # Right paddle
     pygame.draw.circle(screen, (255, 255, 255), (bx, by), 10)  # Ball
     
     # Displays Scores
